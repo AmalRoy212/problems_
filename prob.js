@@ -1,6 +1,6 @@
 // 1. Write a program to reverse an array without using an additional array?
 
-let values = [10,50,5,25,80,75,60,90];
+let values = [10,20,30,40,50,60,70,80];
 
 //loop
 function reverseMyArray(element){
@@ -14,7 +14,7 @@ function reverseMyArray(element){
 }
 
 // recursive call
-             //method 1
+//method 1
 function reverseRecurseHelper(element,index,values = null){
   if (index === element.length - 1) return;
   index++;
@@ -28,24 +28,35 @@ function reverseRecurse(element){
   return newValues
 }
 
-              //method 2
+//method 2
+// function recursiveReverse(numbers){
+//   recursiveReverseHelper(numbers, -1);
+// }
 
-function recursiveReverse(numbers){
-  recursiveReverseHelper(numbers, -1);
+// function recursiveReverseHelper(element, index){
+//   if(index === element.length -2) return
+//   index++
+//   recursiveReverseHelper(element, index);
+//   element[element.length] = element[index]
+//   element[index] = 0
+//   // for(let i=index;i<element.length-1;i++){
+//   //   element[i] = element[i+1];
+//   //   console.log(index, element.length, i)
+//   // }
+// }
+
+//method 3
+
+function recursiveReverseArray(arr, min, max){
+  if(min > max){
+    return arr
+  } 
+  [arr[min], arr[max]] = [arr[max], arr[min]];
+  return recursiveReverseArray(arr, min+1, max-1);
 }
 
-function recursiveReverseHelper(element, index){
-  if(index === element.length -2) return
-  index++
-  recursiveReverseHelper(element, index);
-  element[element.length] = element[index]
-  // element[index] = 0
-  for(let i=index;i<element.length;i++){
-    element[i] = element[i+1];
-    console.log(index, element.length, i)
-  }
-}
 // reverseMyArray(values);
 // console.log(values, reverseRecurse(values));
-recursiveReverse(values);
+
+recursiveReverseArray(values, 0, values.length -1);
 console.log(values);
